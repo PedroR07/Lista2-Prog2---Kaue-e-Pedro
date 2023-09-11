@@ -33,7 +33,7 @@ public class Exercicio04 {
                             break;
                         }
                     }
-            }
+                }
             }
         }
         JOptionPane.showMessageDialog(null, matExt(cont));
