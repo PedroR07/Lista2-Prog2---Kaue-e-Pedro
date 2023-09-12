@@ -16,12 +16,12 @@ public class Exercicio10 {
     public static void preencherMatrizes(int A[][], int B[][]){
         for(int i = 0; i < A.length; i++){
             for(int j = 0; j < A[i].length; j++){
-                A[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Preencha a matriz A: "));
+                A[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Preencha a matriz A: \n" + matExt(A) ));
             }
         }
         for(int i = 0; i < B.length; i++){
             for(int j = 0; j < B[i].length; j++){
-                B[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Preencha a matriz B: "));
+                B[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Preencha a matriz B: \n" + matExt(B)));
             }
         }
     }
@@ -45,11 +45,11 @@ public class Exercicio10 {
         String B = "";
         for(int i = 0; i < A.length; i++){
             for(int j = 0; j < A[i].length; j++){
-                if(j > 0 & j / A.length == 0){
-                    B = Integer.toString(A[i][j]) + "\n";
+                if(j == A.length - 1){
+                    B += Integer.toString(A[i][j]) + "\n";
                 }
                 else{
-                    B = Integer.toString(A[i][j]);
+                    B += Integer.toString(A[i][j]) + " - ";
                 }
             }
         }
