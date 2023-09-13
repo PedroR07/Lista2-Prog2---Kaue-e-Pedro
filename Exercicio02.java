@@ -1,6 +1,9 @@
 import javax.swing.JOptionPane;
 
-public class Exercicio02 {
+public class ExercicioComentado21 {
+    
+    public static int Q, Z;
+
     public static void main(String[] args) {
         int [][] A = new int [20][20];
         for(int i = 0; i < 4; i++){
@@ -8,14 +11,16 @@ public class Exercicio02 {
                 A[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira 16 valores: "));
             }
         }
+        Q = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o número de linhas a ser processado: "));
+        Z = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o número de colunas a ser processado: "));
         JOptionPane.showMessageDialog(null, "Maior Valor: " + maiorValor(A) + "\nMenor Valor: " + menorValor(A) + "\nMédia dos Valores: " + mediaValores(A) + "\nDiagonal Principal: " + diagPrinc(A) + "\nDesvio Padrão: " + desvioPadrão(A));
         JOptionPane.showMessageDialog(null, "Matriz:\n" + matExt(A));
         JOptionPane.showMessageDialog(null, "Matriz Normalizada:\n" + matNorm(A));
     }
     public static int maiorValor(int A[][]){
         int n = -999999999;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < Z; j++){
                 if(A[i][j] > n){
                     n = A[i][j];
                 }
@@ -25,8 +30,8 @@ public class Exercicio02 {
     }
     public static int menorValor(int A[][]){
         int n = 999999999;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < Q; j++){
                 if(A[i][j] < n){
                     n = A[i][j];
                 }
@@ -36,12 +41,12 @@ public class Exercicio02 {
     }
     public static Double mediaValores(int A[][]){
         double n = 0;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < Z; j++){
                 n += A[i][j];
             }
         }
-        n = n / 16;
+        n = n / (Q * Z);
         return n;
     }
     public static String matExt(int A[][]){
@@ -72,8 +77,8 @@ public class Exercicio02 {
     }
     public static Double desvioPadrão(int A[][]){
         double DP = 0, media = mediaValores(A), variancia = 0;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
+        for(int i = 0; i < Q; i++){
+            for(int j = 0; j < Z; j++){
                 variancia += Math.pow(A[i][j] - media, 2);
             }
         }
