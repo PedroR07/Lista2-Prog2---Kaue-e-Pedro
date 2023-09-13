@@ -1,113 +1,81 @@
-import javax.swing.JOptionPane;
+package lista2;
 
-public class ExercicioComentado21 {
-    
-    public static int Q, Z;
+import java.util.Scanner;
+
+public class Exercicio02 {
 
     public static void main(String[] args) {
-        int [][] A = new int [20][20];
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                A[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira 16 valores: "));
+        Scanner ler = new Scanner(System.in);
+
+        int M[][] = new int[20][20];
+
+        // Solicita que o usuário insira elementos nas primeiras 4 linhas e 4 colunas
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print("Insira um elemento para a linha " + (i + 1) + " coluna " + (j + 1) + ": ");
+                M[i][j] = ler.nextInt();
             }
         }
-        Q = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o número de linhas a ser processado: "));
-        Z = Integer.parseInt(JOptionPane.showInputDialog(null, "Insira o número de colunas a ser processado: "));
-        JOptionPane.showMessageDialog(null, "Maior Valor: " + maiorValor(A) + "\nMenor Valor: " + menorValor(A) + "\nMédia dos Valores: " + mediaValores(A) + "\nDiagonal Principal: " + diagPrinc(A) + "\nDesvio Padrão: " + desvioPadrão(A));
-        JOptionPane.showMessageDialog(null, "Matriz:\n" + matExt(A));
-        JOptionPane.showMessageDialog(null, "Matriz Normalizada:\n" + matNorm(A));
-    }
-    public static int maiorValor(int A[][]){
-        int n = -999999999;
-        for(int i = 0; i < Q; i++){
-            for(int j = 0; j < Z; j++){
-                if(A[i][j] > n){
-                    n = A[i][j];
+
+        // Preenche o restante da matriz com zeros
+        for (int i = 0; i < M.length; i++) {
+            for (int j = 0; j < M.length; j++) {
+                if (i >= 4 || j >= 4) {
+                    M[i][j] = 0;
                 }
             }
         }
-        return n;
+
+        System.out.println("Matriz resultante:");
+        imprimirMatriz(M);
+
+        ler.close();
     }
-    public static int menorValor(int A[][]){
-        int n = 999999999;
-        for(int i = 0; i < Q; i++){
-            for(int j = 0; j < Q; j++){
-                if(A[i][j] < n){
-                    n = A[i][j];
+
+    // Método para retornar o maior valor em uma submatriz MxN
+    public static int maiorValor(int[][] matriz, int M, int N) {
+        int maior = matriz[0][0];
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (matriz[i][j] > maior) {
+                    maior = matriz[i][j];
                 }
             }
         }
-        return n;
+        return maior;
     }
-    public static Double mediaValores(int A[][]){
-        double n = 0;
-        for(int i = 0; i < Q; i++){
-            for(int j = 0; j < Z; j++){
-                n += A[i][j];
-            }
-        }
-        n = n / (Q * Z);
-        return n;
-    }
-    public static String matExt(int A[][]){
-        String n = "";
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                if(j == 3){
-                    n += Integer.toString(A[i][j]) + "\n";
-                }
-                else{
-                    n += Integer.toString(A[i][j]) + " - ";
+
+    // Método para retornar o menor valor em uma submatriz MxN
+    public static int menorValor(int[][] matriz, int M, int N) {
+        int menor = matriz[0][0];
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                if (matriz[i][j] < menor) {
+                    menor = matriz[i][j];
                 }
             }
         }
-        return n;
+        return menor;
     }
-    public static String diagPrinc(int A[][]){
-        String n = "";
-        for(int i = 0; i < 4; i++){
-            if(i == 3){
-                n += Integer.toString(A[i][i]);
-            }
-            else{
-            n += Integer.toString(A[i][i]) + " - ";
+
+    // Método para retornar a média dos valores em uma submatriz MxN
+    public static double mediaValores(int[][] matriz, int M, int N) {
+        int soma = 0;
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                soma += matriz[i][j];
             }
         }
-        return n;
+        return (double) soma / (M * N);
     }
-    public static Double desvioPadrão(int A[][]){
-        double DP = 0, media = mediaValores(A), variancia = 0;
-        for(int i = 0; i < Q; i++){
-            for(int j = 0; j < Z; j++){
-                variancia += Math.pow(A[i][j] - media, 2);
+
+    // Método para imprimir uma matriz
+    public static void imprimirMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print(matriz[i][j] + " ");
             }
+            System.out.println();
         }
-        variancia = variancia / 16;
-        DP = Math.pow(variancia, 2);
-        return DP;
-    }
-    public static String matNorm(int A[][]){
-        double[][] B = new double[20][20];
-        String matrizNormalizada = "";
-        double C = menorValor(A);
-        double D = maiorValor(A);
-        double E = 0;
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                E = A[i][j] - C;
-                B[i][j] = (E / D);
-            }
-        }
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 4; j++){
-                if(j == 3){
-                    matrizNormalizada += Double.toString(B[i][j]) + "\n";
-                }
-                else{
-                    matrizNormalizada += Double.toString(B[i][j]) + " - ";
-                }
-            }
-        }
-        return matrizNormalizada;
     }
 }
