@@ -5,6 +5,9 @@ import java.util.Random;
 
 public class Exercicio011 {
 
+	/*
+	 - Faça um método que gere uma “imagem"aleatória usando apenas ‘ ’ e *
+	 */
 	
 	 // Método para gerar uma imagem aleatória
     public static void geraImagem(int altura, int largura) {
